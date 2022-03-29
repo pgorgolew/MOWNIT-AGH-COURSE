@@ -1,33 +1,61 @@
 import networkx as nx
-import random
+import numpy as np
+
+seed = 100
+
 
 def gen_2d(n):
     edges_str = ""
-    for i in range(n**2):
-        if i%n != n-1: #patrz w prawo
-            R = random.randint(0, 15)
-            edges_str += f"({i},{i+1}, {R});"
-        if i//n != n-1: #patrz w doł
-            R = random.randint(0, 15)
-            edges_str += f"({i},{i+n}, {R});"
+    for i in range(n ** 2):
+        if i % n != n - 1:  # patrz w prawo
+            R = np.random.randint(1, 30)
+            edges_str += f"({i},{i + 1}, {R});"
+        if i // n != n - 1:  # patrz w doł
+            R = np.random.randint(1, 30)
+            edges_str += f"({i},{i + n}, {R});"
 
-    print(edges_str[0:-1])
+    return edges_str[0:-1]
+
 
 def gen_spojny(n):
+    G = nx.erdos_renyi_graph(n, 0.3, seed)
+
+    nodes = np.arange(0, n)
+    np.random.shuffle(nodes)
+    for i in range(n - 1):
+        G.add_edge(nodes[i], nodes[i + 1])
+
     edges_str = ""
-    for s in range(n):
-        edges_str += f"({s},{(s+1)%n},{random.randint(0, 15)});"
+    for edge in list(G.edges()):
+        edges_str += f"({edge[0]},{edge[1]},{np.random.randint(1, 30)});"
 
-    for s in range(n):
-        for t in range(s+1, n):
-            if s==t or (s+1)%n==t or (s-1)%n==t:
-                continue
-            if random.random() < 0.2:
-                edges_str += f"({s},{t},{random.randint(0, 15)});"
-
-    print(edges_str[0:-1])
-
-gen_spojny(100)
+    return edges_str[0:-1]
 
 
+def gen_small_world(n, k, p, tries):
+    G = nx.connected_watts_strogatz_graph(n=n, k=k, p=p, tries=tries)
+
+    edges_str = ""
+    for edge in list(G.edges()):
+        edges_str += f"({edge[0]},{edge[1]},{np.random.randint(1, 30)});"
+
+    return edges_str[0:-1]
+
+
+def gen_bridge():
+    pass
+
+
+def gen_3_regular(n):
+    G = nx.random_regular_graph(3, n, seed)
+    edges_str = ""
+    for edge in list(G.edges()):
+        edges_str += f"({edge[0]},{edge[1]},{np.random.randint(1, 30)});"
+
+    return edges_str[0:-1]
+
+
+# gen_small_world(100, 4, 0.5, 50)
+#gen_spojny(150)
+print(gen_3_regular(120))
 #%%
