@@ -80,4 +80,4 @@ def gen_3_regular(n):
 #print(gen_3_regular(120))
 #print(gen_2d(4))
 #print(gen_bridge(40, 40, 3))
-print(gen_built_in_bridge(6))
+#print(gen_built_in_bridge(6))
