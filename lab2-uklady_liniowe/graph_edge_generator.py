@@ -19,7 +19,7 @@ def gen_2d(n):
 
 
 def gen_spojny(n):
-    G = nx.erdos_renyi_graph(n, 0.3, seed)
+    G = nx.erdos_renyi_graph(n, 0.9, seed)
 
     nodes = np.arange(0, n)
     np.random.shuffle(nodes)
@@ -74,10 +74,19 @@ def gen_3_regular(n):
 
     return edges_str[0:-1]
 
+def petersen():
+    G = nx.petersen_graph()
+    edges_str = ""
+    for edge in list(G.edges()):
+        edges_str += f"({edge[0]},{edge[1]},{np.random.randint(1, 30)});"
+
+    return edges_str[0:-1]
 
 # gen_small_world(100, 4, 0.5, 50)
-#gen_spojny(150)
+#print(gen_spojny(12))
 #print(gen_3_regular(120))
 #print(gen_2d(4))
 #print(gen_bridge(40, 40, 3))
 #print(gen_built_in_bridge(6))
+print(petersen())
+
