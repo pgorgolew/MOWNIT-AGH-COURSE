@@ -131,3 +131,6 @@ dmypy.json
 # .idea
 .idea
 .idea/
+
+#data from lab 6
+lab6*/data
