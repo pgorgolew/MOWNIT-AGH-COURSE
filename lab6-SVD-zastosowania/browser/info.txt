@@ -1,0 +1,24 @@
+#  CREATING VENV
+python -m venv venv
+
+# RUNNGING VENV
+source venv/bin/activate <- Linux
+venv\Scripts\activate <- windows
+
+# SETTING FLASK APP (NOT NEEDED IF .flaskenv exists)
+set FLASK_APP=browser.py  <-windows
+export FLASK_APP=browser.py  <- linux
+
+# RUNNING FLASK
+flask run
+
+# GETTING BACK PIP (might be usefull; during upgrading it was uninstalled but not installed)
+python -m ensurepip
+
+# TUTORIAL
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iii-web-forms
+
+# RUNNING
+1. go to browser folder
+2. run venv
+3. type `flask run`
